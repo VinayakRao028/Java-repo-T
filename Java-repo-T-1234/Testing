@@ -1,0 +1,36 @@
+import unittest
+import requests
+
+class IntegrationTests(unittest.TestCase):
+    BASE_URL = "http://localhost:8080/api"  # Adjust this URL as needed
+
+    def test_get_products(self):
+        response = requests.get(f"{self.BASE_URL}/products")
+        self.assertEqual(response.status_code, 200)
+        products = response.json()
+        self.assertIsInstance(products, list)
+        self.assertTrue(len(products) > 0)
+
+    def test_get_product_categories(self):
+        response = requests.get(f"{self.BASE_URL}/product-category")
+        self.assertEqual(response.status_code, 200)
+        categories = response.json()
+        self.assertIsInstance(categories, list)
+        self.assertTrue(len(categories) > 0)
+
+    def test_get_countries(self):
+        response = requests.get(f"{self.BASE_URL}/countries")
+        self.assertEqual(response.status_code, 200)
+        countries = response.json()
+        self.assertIsInstance(countries, list)
+        self.assertTrue(len(countries) > 0)
+
+    def test_get_states(self):
+        response = requests.get(f"{self.BASE_URL}/states")
+        self.assertEqual(response.status_code, 200)
+        states = response.json()
+        self.assertIsInstance(states, list)
+        self.assertTrue(len(states) > 0)
+
+if __name__ == "__main__":
+    unittest.main()

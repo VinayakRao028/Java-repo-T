@@ -1,0 +1,53 @@
+{
+  "application": {
+    "name": "Java E-commerce Application",
+    "version": "1.0.0",
+    "description": "A Spring Boot based e-commerce application"
+  },
+  "server": {
+    "port": 8080,
+    "contextPath": "/api"
+  },
+  "database": {
+    "url": "jdbc:mysql://localhost:3306/full-stack-ecommerce",
+    "username": "ecommerceapp",
+    "password": "ecommerceapp",
+    "driver": "com.mysql.cj.jdbc.Driver"
+  },
+  "jpa": {
+    "show-sql": true,
+    "hibernate": {
+      "ddl-auto": "update",
+      "dialect": "org.hibernate.dialect.MySQL8Dialect"
+    }
+  },
+  "logging": {
+    "level": {
+      "root": "INFO",
+      "com.victorgarciarubio.ecommerce": "DEBUG"
+    }
+  },
+  "cors": {
+    "allowed-origins": ["http://localhost:4200"],
+    "allowed-methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    "allowed-headers": ["*"],
+    "allow-credentials": true
+  },
+  "swagger": {
+    "enabled": true,
+    "title": "E-commerce API Documentation",
+    "description": "API documentation for the Java E-commerce Application",
+    "version": "1.0",
+    "base-package": "com.victorgarciarubio.ecommerce"
+  },
+  "security": {
+    "jwt": {
+      "secret": "ecommerceSecretKey",
+      "expiration": 86400000
+    }
+  },
+  "pagination": {
+    "default-page-size": 20,
+    "max-page-size": 1000
+  }
+}

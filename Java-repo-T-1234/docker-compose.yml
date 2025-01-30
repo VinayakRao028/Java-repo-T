@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/full-stack-ecommerce?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=ecommerceapp
+      - SPRING_DATASOURCE_PASSWORD=ecommerceapp
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=full-stack-ecommerce
+      - MYSQL_USER=ecommerceapp
+      - MYSQL_PASSWORD=ecommerceapp
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+      - ./bin/db-scripts:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

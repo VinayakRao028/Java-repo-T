@@ -1,0 +1,146 @@
+# Process Configuration for E-commerce Application
+
+# Application Settings
+app:
+  name: E-commerce Application
+  version: 1.0.0
+  environment: production
+
+# Database Configuration
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  name: full-stack-ecommerce
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+
+# Server Configuration
+server:
+  port: 8080
+  context-path: /api
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.victorgarciarubio.ecommerce: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: logs/application.log
+
+# Security Configuration
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 86400000 # 24 hours in milliseconds
+
+# Cors Configuration
+cors:
+  allowed-origins: http://localhost:4200, https://yourdomain.com
+  allowed-methods: GET, POST, PUT, DELETE, OPTIONS
+  allowed-headers: Authorization, Content-Type
+  exposed-headers: Authorization
+  allow-credentials: true
+  max-age: 3600
+
+# Swagger Configuration
+swagger:
+  enabled: true
+  title: E-commerce API Documentation
+  description: API documentation for the E-commerce application
+  version: 1.0
+  base-package: com.victorgarciarubio.ecommerce
+
+# Product Configuration
+product:
+  image-url-prefix: https://yourcdnurl.com/images/
+  default-page-size: 20
+  max-page-size: 100
+
+# Order Processing
+order:
+  processing:
+    - validate_inventory
+    - process_payment
+    - update_inventory
+    - send_confirmation_email
+
+# Email Configuration
+email:
+  host: ${EMAIL_HOST}
+  port: ${EMAIL_PORT}
+  username: ${EMAIL_USERNAME}
+  password: ${EMAIL_PASSWORD}
+  protocol: smtp
+  properties:
+    mail.smtp.auth: true
+    mail.smtp.starttls.enable: true
+
+# Cache Configuration
+cache:
+  type: redis
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+
+# Monitoring
+monitoring:
+  enabled: true
+  endpoint: /actuator
+  metrics-enabled: true
+  health-enabled: true
+  info-enabled: true
+
+# CI/CD Pipeline
+ci-cd:
+  build:
+    - clean
+    - compile
+    - test
+  deploy:
+    - package
+    - docker-build
+    - docker-push
+    - kubernetes-deploy
+
+# Feature Flags
+feature-flags:
+  new-product-recommendation: true
+  advanced-search: false
+  user-reviews: true
+
+# Third-party Integrations
+integrations:
+  payment-gateway:
+    url: ${PAYMENT_GATEWAY_URL}
+    api-key: ${PAYMENT_GATEWAY_API_KEY}
+  shipping-service:
+    url: ${SHIPPING_SERVICE_URL}
+    api-key: ${SHIPPING_SERVICE_API_KEY}
+
+# Backup and Recovery
+backup:
+  schedule: "0 0 1 * * ?" # Daily at 1 AM
+  retention-days: 30
+  storage:
+    type: s3
+    bucket: ${BACKUP_BUCKET_NAME}
+    region: ${AWS_REGION}
+
+# Performance Tuning
+performance:
+  connection-pool-size: 20
+  thread-pool-size: 50
+  cache-ttl-seconds: 3600
+
+# Localization
+localization:
+  default-language: en
+  supported-languages:
+    - en
+    - es
+    - fr
+    - de
+
+# End of Configuration
